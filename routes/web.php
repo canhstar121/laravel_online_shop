@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminLoginController;
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -20,9 +23,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/',[FrontController::class,'index'])->name('front.home');
+
+Route::post('/process-register',[AuthController::class,'processRegister'])->name('account.processRegister');
+Route::get('/register',[AuthController::class,'register'])->name('account.register');
+
+
 
 
 Route::group(['prefix' => 'admin'],function(){
@@ -53,6 +62,13 @@ Route::group(['prefix' => 'admin'],function(){
         Route::put('/sub-categories/{subCategory}',[SubCategoryController::class,'update'])->name('sub-categories.update');
         Route::delete('/sub-categories/{subCategory}',[SubCategoryController::class,'destroy'])->name('sub-categories.delete');
 
+
+        //Brands Routes
+        Route::get('/brands/create',[BrandController::class,'create'])->name('brands.create');
+        Route::post('/brands',[BrandController::class,'store'])->name('brands.store');
+
+
+        
         //temp-image.create
         Route::post('/upload-temps-image',[TempImagesController::class,'create'])->name('temp-images.create');
         

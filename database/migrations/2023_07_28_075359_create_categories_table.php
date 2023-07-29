@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::rename('temp_images_tables', 'temp_images');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('temp_images', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('categories');
     }
 };
