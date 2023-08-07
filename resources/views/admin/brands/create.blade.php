@@ -36,7 +36,18 @@
                             <input type="text" readonly name="slug" id="slug" class="form-control" placeholder="Slug">	
                             <p></p>
                         </div>
-                    </div>									
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="email">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">Block</option>
+                            </select>
+                            <p></p>
+                        </div>
+                    </div>	
+                    									
                 </div>
             </div>							
         </div>
@@ -67,14 +78,14 @@ $("#createBrandForm").submit(function(event){
 
             if(response["status"]==true){
 
-                window.location.href="{{  route('categories.index') }}";
-                $("#name").removeClass('is-invalid')
-                    .siblings('p')
-                    .removeClass('invalid-feedback').html("");
+                // window.location.href="{{  route('categories.index') }}";
+                // $("#name").removeClass('is-invalid')
+                //     .siblings('p')
+                //     .removeClass('invalid-feedback').html("");
 
-                $("#slug").removeClass('is-invalid')
-                    .siblings('p')
-                    .removeClass('invalid-feedback').html("");
+                // $("#slug").removeClass('is-invalid')
+                //     .siblings('p')
+                //     .removeClass('invalid-feedback').html("");
             }else{
                 var errors = response['errors'];
                 if(errors['name']) {
